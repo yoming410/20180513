@@ -1,9 +1,9 @@
-//小算盤(計算機)
+﻿//小算盤面板
 import java.awt.*;
 import java.awt.event.*;
 public class calculator
 {
-    private static Frame frm=new Frame("小算盤");
+    private static Frame frm=new Frame("小算盤面板");
     private static Panel pn1=new Panel(new GridLayout(4,3));
     private static Panel pn2=new Panel(new GridLayout(4,1));
     private static Label lab=new Label("0",Label.RIGHT);
@@ -78,60 +78,38 @@ public class calculator
                         break;
                     }
                 }
+
                 if(btn==cn){
                     result=0L;//把儲存的結果歸0
                     num=0L;
                     op=0;
                     lab.setText(Long.toString(num));
                 }else if(btn==ad){//加
-                    save_num(ad);
-                    op=1;
+                    lab.setText(lab.getText()+"+");
 
                 }else if(btn==sub){//減
-                    save_num(sub);
-                    op=2;
-                }else if(btn==mul){//乘
-                    save_num(mul);
-                    op=3;
-                }else if(btn==div){//除
-                    save_num(div);
-                    op=4;
-                }else if(btn==amo){
-                    result=Long.parseLong(lab.getText());
+                    lab.setText(lab.getText()+"-");
 
-                    switch(op){
-                        case 1:
-                            num+=result;
-                            break;
-                        case 2:
-                            num-=result;
-                            break;
-                        case 3:
-                            num*=result;
-                            break;
-                        case 4:
-                            num/=result;
-                            break;
-                        default:
-                    }
-                    result=0L;
-                    //輸出運算後的結果到顯示器
-                    lab.setText(Long.toString(num));
+                }else if(btn==mul){//乘
+                    lab.setText(lab.getText()+"*");
+
+                }else if(btn==div){//除
+                    lab.setText(lab.getText()+"/");
+
+                }else if(btn==amo){
+                    lab.setText(lab.getText()+"=");
+
+                    //輸出按鈕結果到顯示器
+                    //  lab.setText(Long.toString(num));
                 }
             }catch(NumberFormatException ne){
                 //捕捉例外
-            }catch(ArithmeticException ae){
-                //捕捉被除數是零的例外
             }
         }
         //輸出數值到顯示器
         private void output_digit(Button btn){
             lab.setText(Long.toString(Long.parseLong(lab.getText()+btn.getLabel())));
         }
-        //把第一組數值儲存起來
-        private void save_num(Button oper){
-            num=Long.parseLong(lab.getText());
-            lab.setText(Long.toString(0L));
-        }
     }
 }
+
